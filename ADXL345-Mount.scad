@@ -1,7 +1,7 @@
 include <ADXL345-Ref.scad>;
 include <../../Utility/Clamp/Clamp.scad>;
 
-#ADXL345();
+// #ADXL345();
 
 module ADXL345_Clamp(Holes = true) {
     ADXLW = 21;
@@ -33,18 +33,24 @@ module ADXL345_Clamp(Holes = true) {
             Ext = 11;
 
             Clamp(
+                Clearance = 0.4,
                 Radius = 15,
                 PlateExtension = Ext,
+                PlateThickness = 5,
+                Thickness = 4,
                 Width = Width
             );
 
-            translate([2, - 17 - Ext/2,0])
+            translate([5-1.5, - 17 - Ext/2,0])
             cube([1.5,Ext,21+2*Clear], center=true);
 
-            if(Holes) Holes(Angled = false);
+            translate([5-0.1, - 17 - Ext/2 - 1.5,0])
+            cube([1.5,Ext,18], center=true);
+
+            // if(Holes) Holes(Angled = false);
         }
 
-        if(!Holes) Holes(Angled = true);
+        // if(!Holes) Holes(Angled = true);
 
     }
 }
